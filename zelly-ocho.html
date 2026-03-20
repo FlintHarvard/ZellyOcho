@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZELLY OCHO ★ VLAD LIFE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,900&family=JetBrains+Mono:wght@300;400;700&family=Unbounded:wght@200;400;700;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   OPIUM STYLE — ZELLY OCHO — VLAD LIFE
+   Dark, Chrome, Distorted, Experimental
+═══════════════════════════════════════════ */
+
+:root {
+  --black: #000000;
+  --dark: #0a0a0a;
+  --darker: #050505;
+  --chrome: #c0c0c0;
+  --chrome-light: #e8e8e8;
+  --chrome-dark: #888888;
+  --accent: #ff0033;
+  --accent-dim: #990022;
+  --green-glow: #00ff44;
+  --purple: #6b00ff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--chrome-dark) var(--black);
+}
+
+body {
+  background: var(--black);
+  color: var(--chrome);
+  font-family: 'JetBrains Mono', monospace;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--black);
+}
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* SCAN LINES */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ═══ NAV ═══ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(192,192,192,0.08);
+}
+
+.nav-logo {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff, #888, #fff, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--chrome-dark);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--chrome-light);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 20px 60px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(107,0,255,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 30%, rgba(255,0,51,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(0,255,68,0.03) 0%, transparent 40%);
+}
+
+.hero-stars {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.star {
+  position: absolute;
+  color: var(--chrome-dark);
+  font-size: 12px;
+  opacity: 0.3;
+  animation: starPulse 3s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.3); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.hero-tag {
+  font-size: 10px;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+  color: var(--chrome-dark);
+  margin-bottom: 30px;
+  animation: fadeSlideUp 1s ease 0.2s both;
+}
+
+.hero-name {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(60px, 12vw, 180px);
+  line-height: 0.85;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #ffffff 0%, #c0c0c0 30%, #888888 60%, #444444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 60px rgba(192,192,192,0.15));
+  animation: fadeSlideUp 1s ease 0.4s both;
+  position: relative;
+}
+
+.hero-name span {
+  display: block;
+}
+
+.hero-name .ocho {
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, #e8e8e8, #666, #e8e8e8, #444);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.hero-sub {
+  margin-top: 40px;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--chrome-dark);
+  text-transform: uppercase;
+  animation: fadeSlideUp 1s ease 0.6s both;
+}
+
+.hero-sub .red {
+  color: var(--accent);
+}
+
+.hero-divider {
+  width: 1px;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--chrome-dark), transparent);
+  margin: 50px auto 0;
+  animation: fadeSlideUp 1s ease 0.8s both;
+}
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══ SECTION STYLING ═══ */
+section {
+  padding: 100px 40px;
+  position: relative;
+}
+
+.section-label {
+  font-size: 9px;
+  letter-spacing: 10px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 5vw, 64px);
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 50px;
+}
+
+/* ═══ BIO SECTION ═══ */
+.bio {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.bio-left {
+  position: relative;
+}
+
+.bio-image-frame {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #111, #0a0a0a);
+  border: 1px solid rgba(192,192,192,0.1);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bio-image-frame::before {
+  content: '★';
+  font-size: 120px;
+  color: rgba(192,192,192,0.04);
+  position: absolute;
+}
+
+.bio-image-frame::after {
+  content: 'ZELLY OCHO';
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(192,192,192,0.2);
+}
+
+.bio-image-inner {
+  font-family: 'Playfair Display', serif;
+  font-size: 200px;
+  font-weight: 900;
+  font-style: italic;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bio-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  margin-top: 20px;
+  background: rgba(192,192,192,0.06);
+}
+
+.bio-stat {
+  background: var(--black);
+  padding: 20px;
+}
+
+.bio-stat-label {
+  font-size: 8px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--chrome-dark);
+  margin-bottom: 6px;
+}
+
+.bio-stat-value {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--chrome-light);
+}
+
+.bio-right {
+  padding-top: 20px;
+}
+
+.bio-text {
+  font-size: 14px;
+  line-height: 2;
+  color: var(--chrome);
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+.bio-text .highlight {
+  color: var(--chrome-light);
+  font-weight: 700;
+  border-bottom: 1px solid var(--accent-dim);
+}
+
+.bio-quote {
+  border-left: 2px solid var(--accent);
+  padding: 20px 30px;
+  margin: 40px 0;
+  background: rgba(255,0,51,0.03);
+}
+
+.bio-quote p {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--chrome-light);
+}
+
+.bio-quote cite {
+  display: block;
+  margin-top: 12px;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--chrome-dark);
+  font-style: normal;
+}
+
+/* ═══ DISCOGRAPHY ═══ */
+#discography {
+  background: var(--darker);
+}
+
+.disco-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2px;
+}
+
+.disco-card {
+  background: var(--black);
+  padding: 35px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  cursor: crosshair;
+  border: 1px solid rgba(192,192,192,0.04);
+}
+
+.disco-card:hover {
+  background: #0d0d0d;
+  border-color: rgba(192,192,192,0.12);
+}
+
+.disco-card::before {
+  content: attr(data-num);
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  color: rgba(192,192,192,0.03);
+  line-height: 1;
+}
+
+.disco-year {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.disco-title {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: var(--chrome-light);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.disco-type {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--chrome-dark);
+  margin-bottom: 15px;
+}
+
+.disco-desc {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--chrome-dark);
+  font-weight: 300;
+}
+
+.disco-tag {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 4px 12px;
+  border: 1px solid rgba(192,192,192,0.15);
+  font-size: 8px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--chrome-dark);
+}
+
+.disco-tag.feat {
+  border-color: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ═══ VLAD SECTION ═══ */
+#vlad {
+  text-align: center;
+  padding: 150px 40px;
+  position: relative;
+}
+
+.vlad-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,0,51,0.04) 0%, transparent 60%);
+}
+
+.vlad-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.vlad-acronym {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.vlad-letter {
+  text-align: center;
+}
+
+.vlad-letter-char {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: clamp(48px, 8vw, 100px);
+  background: linear-gradient(180deg, var(--accent), var(--accent-dim));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  line-height: 1;
+}
+
+.vlad-letter-word {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--chrome-dark);
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.vlad-desc {
+  font-size: 14px;
+  line-height: 2.2;
+  color: var(--chrome);
+  font-weight: 300;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.vlad-desc strong {
+  color: var(--chrome-light);
+  font-weight: 700;
+}
+
+/* ═══ COLLABS ═══ */
+#collabs {
+  background: var(--black);
+}
+
+.collabs-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.collab-item {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid rgba(192,192,192,0.06);
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.collab-item:hover {
+  padding-left: 20px;
+  border-color: rgba(192,192,192,0.15);
+}
+
+.collab-name {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--chrome-light);
+}
+
+.collab-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collab-songs {
+  font-size: 12px;
+  color: var(--chrome-dark);
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.collab-songs span {
+  color: var(--chrome);
+}
+
+.collab-role {
+  font-size: 9px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  white-space: nowrap;
+}
+
+/* ═══ TRACKS ═══ */
+#tracks {
+  background: var(--darker);
+}
+
+.tracks-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.track-row {
+  display: grid;
+  grid-template-columns: 40px 1fr 200px 80px;
+  gap: 20px;
+  padding: 18px 20px;
+  align-items: center;
+  border-bottom: 1px solid rgba(192,192,192,0.04);
+  transition: all 0.3s ease;
+}
+
+.track-row:hover {
+  background: rgba(255,255,255,0.02);
+  border-color: rgba(192,192,192,0.1);
+}
+
+.track-num {
+  font-size: 10px;
+  color: var(--chrome-dark);
+  font-weight: 300;
+}
+
+.track-title {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--chrome-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.track-feat {
+  font-size: 11px;
+  color: var(--chrome-dark);
+  font-weight: 300;
+}
+
+.track-project {
+  font-size: 10px;
+  color: var(--chrome-dark);
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* ═══ TIMELINE ═══ */
+#timeline {
+  background: var(--black);
+}
+
+.timeline-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--chrome-dark), var(--accent-dim), var(--chrome-dark), transparent);
+}
+
+.tl-item {
+  padding: 0 0 60px 50px;
+  position: relative;
+}
+
+.tl-item::before {
+  content: '★';
+  position: absolute;
+  left: -6px;
+  top: 2px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.tl-year {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  background: linear-gradient(135deg, #fff, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+}
+
+.tl-text {
+  font-size: 13px;
+  line-height: 2;
+  color: var(--chrome);
+  font-weight: 300;
+}
+
+.tl-text strong {
+  color: var(--chrome-light);
+  font-weight: 700;
+}
+
+/* ═══ LINKS / CONNECT ═══ */
+#connect {
+  background: var(--darker);
+  text-align: center;
+  padding: 150px 40px;
+}
+
+.connect-links {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+.connect-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--chrome-dark);
+  transition: all 0.3s ease;
+  padding: 30px;
+  border: 1px solid rgba(192,192,192,0.06);
+  min-width: 160px;
+}
+
+.connect-link:hover {
+  color: var(--chrome-light);
+  border-color: rgba(192,192,192,0.2);
+  background: rgba(255,255,255,0.02);
+}
+
+.connect-icon {
+  font-size: 24px;
+}
+
+.connect-label {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.connect-handle {
+  font-size: 12px;
+  color: var(--chrome);
+  font-weight: 700;
+}
+
+/* ═══ FOOTER ═══ */
+.footer {
+  padding: 40px;
+  text-align: center;
+  border-top: 1px solid rgba(192,192,192,0.06);
+}
+
+.footer-text {
+  font-size: 9px;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(192,192,192,0.2);
+}
+
+.footer-vlad {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 900;
+  font-size: 80px;
+  margin-top: 30px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 20px;
+}
+
+/* ═══ SCROLLING MARQUEE ═══ */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 25px 0;
+  border-top: 1px solid rgba(192,192,192,0.04);
+  border-bottom: 1px solid rgba(192,192,192,0.04);
+}
+
+.marquee-inner {
+  display: inline-block;
+  animation: marquee 25s linear infinite;
+}
+
+.marquee-inner span {
+  font-family: 'Unbounded', sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: rgba(192,192,192,0.15);
+  padding: 0 30px;
+}
+
+.marquee-inner span.red-star {
+  color: var(--accent-dim);
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ═══ CHROME DIVIDER ═══ */
+.chrome-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--chrome-dark), transparent);
+  opacity: 0.3;
+}
+
+/* ═══ FLOATING ELEMENTS ═══ */
+.float-cross {
+  position: fixed;
+  font-size: 14px;
+  color: rgba(192,192,192,0.06);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .nav { padding: 15px 20px; }
+  .nav-links { gap: 15px; }
+  .nav-links a { font-size: 8px; letter-spacing: 2px; }
+  
+  section { padding: 60px 20px; }
+  
+  .bio { 
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .collab-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .collab-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .track-row {
+    grid-template-columns: 30px 1fr;
+    gap: 10px;
+  }
+  
+  .track-feat, .track-project {
+    grid-column: 2;
+    text-align: left;
+  }
+  
+  .vlad-acronym { gap: 20px; }
+  
+  .connect-links { gap: 15px; }
+  .connect-link { min-width: 120px; padding: 20px; }
+}
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .hero-sub { font-size: 9px; letter-spacing: 3px; }
+  .bio-stats { grid-template-columns: 1fr; }
+}
+
+/* ═══ GLITCH EFFECT ═══ */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--black);
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--accent);
+  clip-path: inset(0 0 70% 0);
+  animation: glitch-1 3s infinite linear alternate;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: 2px 0 var(--purple);
+  clip-path: inset(70% 0 0 0);
+  animation: glitch-2 3s infinite linear alternate;
+}
+
+@keyframes glitch-1 {
+  0%, 95% { clip-path: inset(0 0 85% 0); }
+  96% { clip-path: inset(15% 0 60% 0); }
+  97% { clip-path: inset(50% 0 20% 0); }
+  98% { clip-path: inset(80% 0 0 0); }
+  99% { clip-path: inset(30% 0 40% 0); }
+  100% { clip-path: inset(0 0 85% 0); }
+}
+
+@keyframes glitch-2 {
+  0%, 95% { clip-path: inset(85% 0 0 0); }
+  96% { clip-path: inset(20% 0 50% 0); }
+  97% { clip-path: inset(60% 0 10% 0); }
+  98% { clip-path: inset(10% 0 70% 0); }
+  99% { clip-path: inset(45% 0 30% 0); }
+  100% { clip-path: inset(85% 0 0 0); }
+}
+
+/* ═══ CURSOR GLOW ═══ */
+.cursor-glow {
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,192,192,0.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9997;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease;
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- FLOATING CROSSES -->
+<div class="float-cross" style="top:15%;left:5%">✝</div>
+<div class="float-cross" style="top:35%;right:8%">★</div>
+<div class="float-cross" style="top:55%;left:3%">✝</div>
+<div class="float-cross" style="top:75%;right:4%">★</div>
+<div class="float-cross" style="top:90%;left:7%">✝</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">ZELLY OCHO</div>
+  <ul class="nav-links">
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#discography">Discography</a></li>
+    <li><a href="#vlad">VLAD</a></li>
+    <li><a href="#tracks">Tracks</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#connect">Connect</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-stars" id="heroStars"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Cleveland, Ohio ★ 1400 Entertainment ★ VLAD LLC</p>
+    <h1 class="hero-name glitch" data-text="ZELLY OCHO">
+      <span>ZELLY</span>
+      <span class="ocho">OCHO</span>
+    </h1>
+    <p class="hero-sub">
+      <span class="red">★</span> Violent Life Around Drugs <span class="red">★</span> Denzel Young <span class="red">★</span> Est. 2015
+    </p>
+    <div class="hero-divider"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span>VLAD LIFE</span><span class="red-star">★</span>
+    <span>CLEVELAND</span><span class="red-star">★</span>
+    <span>1400 ENTERTAINMENT</span><span class="red-star">★</span>
+    <span>AUTO-TRAP</span><span class="red-star">★</span>
+    <span>PROUD OF INSANITY</span><span class="red-star">★</span>
+    <span>DIRTY DRUGS</span><span class="red-star">★</span>
+    <span>SIG COLLECTIVE</span><span class="red-star">★</span>
+    <span>VLAD LIFE</span><span class="red-star">★</span>
+    <span>CLEVELAND</span><span class="red-star">★</span>
+    <span>1400 ENTERTAINMENT</span><span class="red-star">★</span>
+    <span>AUTO-TRAP</span><span class="red-star">★</span>
+    <span>PROUD OF INSANITY</span><span class="red-star">★</span>
+    <span>DIRTY DRUGS</span><span class="red-star">★</span>
+    <span>SIG COLLECTIVE</span><span class="red-star">★</span>
+  </div>
+</div>
+
+<!-- BIO -->
+<section id="bio">
+  <div class="bio">
+    <div class="bio-left">
+      <div class="bio-image-frame">
+        <div class="bio-image-inner">Z</div>
+      </div>
+      <div class="bio-stats">
+        <div class="bio-stat">
+          <div class="bio-stat-label">Real Name</div>
+          <div class="bio-stat-value">Denzel Young</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Origin</div>
+          <div class="bio-stat-value">Cleveland, OH</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Active Since</div>
+          <div class="bio-stat-value">2015</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Label</div>
+          <div class="bio-stat-value">1400 / VLAD LLC</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Genres</div>
+          <div class="bio-stat-value">Trap · Rage · Plugg</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Monthly Listeners</div>
+          <div class="bio-stat-value">30K+ (Spotify)</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Collective</div>
+          <div class="bio-stat-value">SIG</div>
+        </div>
+        <div class="bio-stat">
+          <div class="bio-stat-label">Style</div>
+          <div class="bio-stat-value">Auto-Trap</div>
+        </div>
+      </div>
+    </div>
+    <div class="bio-right">
+      <div class="section-label">001 — About</div>
+      <h2 class="section-title">The Origin</h2>
+      <p class="bio-text">
+        <span class="highlight">Denzel Young</span>, better known as <span class="highlight">Zelly Ocho</span>, is a rapper and recording artist from <span class="highlight">Cleveland, Ohio</span>. Known for his chopper-like cadence and authentic autotune-trap sound, he's been grinding nonstop for nearly a decade.
+      </p>
+      <p class="bio-text">
+        He started rapping seriously at 18 in <span class="highlight">2015</span> under the name <span class="highlight">Lil Ocho</span> — a name his older friend Sam gave him based on his No. 8 jersey from his rec basketball team. He began cranking out remixes and perfecting his craft.
+      </p>
+      <p class="bio-text">
+        After two years, Lil Ocho evolved into <span class="highlight">Zelly Ocho</span> and started dropping four to five projects annually. By 2020, his sound had become a movement that inspired a new wave of artists. He connected with producer <span class="highlight">16yrold (Sig.Carlito)</span> — the same producer behind Sheck Wes' massive hit "Mo Bamba" — and together they locked in on a string of projects.
+      </p>
+      <p class="bio-text">
+        His drug-induced early raps evolved into quick-paced cadences with cohesive bars about everyday struggles. Zelly proudly promotes the <span class="highlight">VLAD lifestyle</span> — welcoming people of all backgrounds while channeling positive energy through his music.
+      </p>
+      <div class="bio-quote">
+        <p>"I know that I produce the best music when I'm not under the influence."</p>
+        <cite>— Zelly Ocho</cite>
+      </div>
+      <p class="bio-text">
+        After enduring his father's absence and the influence of drugs and violence, Zelly chose to rise above his circumstances. In the words of <span class="highlight">Trippie Redd</span>, Zelly Ocho is VLAD: "very loyal and determined."
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="chrome-divider"></div>
+
+<!-- DISCOGRAPHY -->
+<section id="discography">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="section-label">002 — Discography</div>
+    <h2 class="section-title">Selected Works</h2>
+  </div>
+  <div class="disco-grid">
+    <div class="disco-card" data-num="01">
+      <div class="disco-year">2019</div>
+      <div class="disco-title">It Could B Worse</div>
+      <div class="disco-type">Mixtape</div>
+      <div class="disco-desc">Early breakout project produced alongside 16yrold. Helped define his raw, authentic sound coming out of Cleveland.</div>
+      <div class="disco-tag">Fan Favorite</div>
+    </div>
+    <div class="disco-card" data-num="02">
+      <div class="disco-year">2019</div>
+      <div class="disco-title">Drugs in Hell</div>
+      <div class="disco-type">Collab Tape — w/ DOCK hELLISh</div>
+      <div class="disco-desc">Dark, atmospheric collaboration exploring the depths of Zelly's "dirty drugs era" sound.</div>
+    </div>
+    <div class="disco-card" data-num="03">
+      <div class="disco-year">2020</div>
+      <div class="disco-title">Dungeon Music</div>
+      <div class="disco-type">Album</div>
+      <div class="disco-desc">A pivotal release that showcased his evolving sound and lyrical maturity. His most acclaimed early work.</div>
+      <div class="disco-tag">Highest Rated</div>
+    </div>
+    <div class="disco-card" data-num="04">
+      <div class="disco-year">2020</div>
+      <div class="disco-title">Halloween Files</div>
+      <div class="disco-type">Collab Tape — w/ 16yrold</div>
+      <div class="disco-desc">Joint project with main producer 16yrold (Sig.Carlito). Dark, atmospheric trap at its finest.</div>
+    </div>
+    <div class="disco-card" data-num="05">
+      <div class="disco-year">2020</div>
+      <div class="disco-title">Dead or Alive</div>
+      <div class="disco-type">Album</div>
+      <div class="disco-desc">A statement project proving his versatility and consistency in the underground scene.</div>
+    </div>
+    <div class="disco-card" data-num="06">
+      <div class="disco-year">2021</div>
+      <div class="disco-title">OnlyVlad</div>
+      <div class="disco-type">Mixtape</div>
+      <div class="disco-desc">First project fully dedicated to the VLAD lifestyle movement. Pure mixtape vibes straight from the home studio.</div>
+      <div class="disco-tag">VLAD Era</div>
+    </div>
+    <div class="disco-card" data-num="07">
+      <div class="disco-year">2021</div>
+      <div class="disco-title">Vlamily</div>
+      <div class="disco-type">Project</div>
+      <div class="disco-desc">Expanding the VLAD universe with his community — a celebration of loyalty and brotherhood.</div>
+    </div>
+    <div class="disco-card" data-num="08">
+      <div class="disco-year">2022</div>
+      <div class="disco-title">V2BM3 Series (Vol. 1–5)</div>
+      <div class="disco-type">Mixtape Series</div>
+      <div class="disco-desc">"Vlad To Be Me" — an ongoing series capturing raw mixtape energy. Vol. 5 features the Trippie Redd collab "Lucky Charms".</div>
+      <div class="disco-tag feat">ft. Trippie Redd</div>
+    </div>
+    <div class="disco-card" data-num="09">
+      <div class="disco-year">2022</div>
+      <div class="disco-title">Reach 4 the Sky</div>
+      <div class="disco-type">Album</div>
+      <div class="disco-desc">Ambitious full-length pushing his sound to new heights. Autotune-trap anthems with emotional depth.</div>
+    </div>
+    <div class="disco-card" data-num="10">
+      <div class="disco-year">2022</div>
+      <div class="disco-title">Purpose from Pain</div>
+      <div class="disco-type">EP</div>
+      <div class="disco-desc">Channeling personal struggles into artistic expression. One of his most emotionally raw releases.</div>
+    </div>
+    <div class="disco-card" data-num="11">
+      <div class="disco-year">2023</div>
+      <div class="disco-title">High Art</div>
+      <div class="disco-type">Album</div>
+      <div class="disco-desc">Elevated trap artistry — his most polished production yet. A bridge between eras.</div>
+    </div>
+    <div class="disco-card" data-num="12">
+      <div class="disco-year">2024</div>
+      <div class="disco-title">#2LV</div>
+      <div class="disco-type">Album — 10 Tracks</div>
+      <div class="disco-desc">Features the landmark collaboration "V14D" with Trippie Redd. The project that officially put the two Ohio natives together.</div>
+      <div class="disco-tag feat">ft. Trippie Redd</div>
+    </div>
+    <div class="disco-card" data-num="13">
+      <div class="disco-year">2024</div>
+      <div class="disco-title">H.O.E.</div>
+      <div class="disco-type">EP</div>
+      <div class="disco-desc">Featuring "Pathetic" with Trippie Redd and "Hipnotica" with Trippie Redd & K Suave.</div>
+      <div class="disco-tag feat">ft. Trippie Redd · K Suave</div>
+    </div>
+    <div class="disco-card" data-num="14">
+      <div class="disco-year">2024</div>
+      <div class="disco-title">Dirty Drugs</div>
+      <div class="disco-type">Mixtape</div>
+      <div class="disco-desc">A farewell to his "dirty drugs era." An homage to the beginning of his musical journey, closing that chapter for good.</div>
+      <div class="disco-tag">Era Closer</div>
+    </div>
+    <div class="disco-card" data-num="15">
+      <div class="disco-year">2025</div>
+      <div class="disco-title">VLUTO / Vlada / Vlux</div>
+      <div class="disco-type">Projects — w/ DJ Phat</div>
+      <div class="disco-desc">Recent collaborative projects with DJ Phat continuing the VLAD universe into 2025.</div>
+      <div class="disco-tag">Latest</div>
+    </div>
+    <div class="disco-card" data-num="16">
+      <div class="disco-year">2025</div>
+      <div class="disco-title">Wait on Vlad / Don't Talk to Me</div>
+      <div class="disco-type">Projects</div>
+      <div class="disco-desc">His latest solo drops. The grind never stops — always delivering new music to the VLAD community.</div>
+      <div class="disco-tag">New</div>
+    </div>
+  </div>
+</section>
+
+<!-- VLAD -->
+<section id="vlad">
+  <div class="vlad-bg"></div>
+  <div class="vlad-content">
+    <div class="section-label" style="text-align:center;">003 — Philosophy</div>
+    <h2 class="section-title" style="text-align:center;">The VLAD Movement</h2>
+    <div class="vlad-acronym">
+      <div class="vlad-letter">
+        <span class="vlad-letter-char">V</span>
+        <span class="vlad-letter-word">Violent</span>
+      </div>
+      <div class="vlad-letter">
+        <span class="vlad-letter-char">L</span>
+        <span class="vlad-letter-word">Life</span>
+      </div>
+      <div class="vlad-letter">
+        <span class="vlad-letter-char">A</span>
+        <span class="vlad-letter-word">Around</span>
+      </div>
+      <div class="vlad-letter">
+        <span class="vlad-letter-char">D</span>
+        <span class="vlad-letter-word">Drugs</span>
+      </div>
+    </div>
+    <p class="vlad-desc">
+      VLAD is more than an acronym — it's a <strong>lifestyle and movement</strong> that Zelly Ocho built from the ground up. It represents being present in the chaos without being consumed by it. Zelly is no longer on drugs, but he's still around them. That's the reality of where he comes from.
+    </p>
+    <br><br>
+    <p class="vlad-desc">
+      The movement welcomes <strong>people of all backgrounds</strong>. According to Trippie Redd, being VLAD also means being <strong>"Very Loyal And Determined"</strong> — a testament to Zelly's relentless work ethic and dedication to his craft and community.
+    </p>
+    <br><br>
+    <p class="vlad-desc">
+      Projects like <strong>OnlyVlad, Vlamily, VLAD 2, V2BM3,</strong> and his latest <strong>VLUTO, Vlada, Vlux</strong> drops all carry the VLAD banner — a brand that runs through everything Zelly creates.
+    </p>
+  </div>
+</section>
+
+<div class="chrome-divider"></div>
+
+<!-- COLLABS -->
+<section id="collabs">
+  <div class="collabs-container">
+    <div class="section-label">004 — Collaborators</div>
+    <h2 class="section-title">The Circle</h2>
+    
+    <div class="collab-item">
+      <div class="collab-name">Trippie Redd</div>
+      <div class="collab-details">
+        <div class="collab-songs">
+          <span>V14D</span> · <span>Lucky Charms</span> · <span>Worth</span> · <span>Heavenly</span> · <span>Pathetic</span> · <span>Hate</span> · <span>Hipnotica</span>
+        </div>
+        <div class="collab-role">Brother / Ohio Native</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">16yrold (Sig.Carlito)</div>
+      <div class="collab-details">
+        <div class="collab-songs">
+          <span>Main producer</span> · <span>Halloween Files</span> · <span>It Could B Worse</span> · <span>VLAD</span> · <span>skinnyjeans</span> · <span>Soicyracks</span>
+        </div>
+        <div class="collab-role">Producer / SIG Collective</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">DJ Phat</div>
+      <div class="collab-details">
+        <div class="collab-songs">
+          <span>VLUTO</span> · <span>Vlada</span> · <span>Vlux</span> — full collaborative projects in 2025
+        </div>
+        <div class="collab-role">Producer / 2025 Run</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">K Suave</div>
+      <div class="collab-details">
+        <div class="collab-songs">
+          <span>Hipnotica</span> · <span>Hate</span> · <span>Eclipse</span>
+        </div>
+        <div class="collab-role">Artist</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">Sharkboy</div>
+      <div class="collab-details">
+        <div class="collab-songs">
+          <span>SLYDE</span> — Sharkboy known for co-producing Yeat's "Sorry Bout That"
+        </div>
+        <div class="collab-role">Producer</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">D. Savage</div>
+      <div class="collab-details">
+        <div class="collab-songs"><span>SRT/archive</span></div>
+        <div class="collab-role">Artist</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">UnoTheActivist</div>
+      <div class="collab-details">
+        <div class="collab-songs"><span>Flex a Hunnid</span></div>
+        <div class="collab-role">Artist</div>
+      </div>
+    </div>
+    
+    <div class="collab-item">
+      <div class="collab-name">DOCK hELLISh</div>
+      <div class="collab-details">
+        <div class="collab-songs"><span>Drugs in Hell</span> — full collaborative tape (2019)</div>
+        <div class="collab-role">Artist / Producer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="chrome-divider"></div>
+
+<!-- KEY TRACKS -->
+<section id="tracks">
+  <div class="tracks-container">
+    <div class="section-label">005 — Key Tracks</div>
+    <h2 class="section-title">Essential Listening</h2>
+    
+    <div class="track-row">
+      <div class="track-num">01</div>
+      <div class="track-title">Deadguy</div>
+      <div class="track-feat">Viral hit</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">02</div>
+      <div class="track-title">No Wok</div>
+      <div class="track-feat">Viral single</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">03</div>
+      <div class="track-title">Score</div>
+      <div class="track-feat">Breakout moment</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">04</div>
+      <div class="track-title">V14D</div>
+      <div class="track-feat">ft. Trippie Redd</div>
+      <div class="track-project">#2LV</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">05</div>
+      <div class="track-title">Lucky Charms</div>
+      <div class="track-feat">ft. Trippie Redd</div>
+      <div class="track-project">V2BM3 Vol.5</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">06</div>
+      <div class="track-title">Pathetic</div>
+      <div class="track-feat">ft. Trippie Redd</div>
+      <div class="track-project">H.O.E.</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">07</div>
+      <div class="track-title">Hipnotica</div>
+      <div class="track-feat">ft. Trippie Redd & K Suave</div>
+      <div class="track-project">H.O.E.</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">08</div>
+      <div class="track-title">Kill Myself</div>
+      <div class="track-feat">prod. 16yrold / dir. DotComNirvan</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">09</div>
+      <div class="track-title">2 Strapped</div>
+      <div class="track-feat">prod. Harrison</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">10</div>
+      <div class="track-title">Death Note</div>
+      <div class="track-feat">prod. Hella Sketchers (RIP)</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">11</div>
+      <div class="track-title">SLYDE</div>
+      <div class="track-feat">prod. Sharkboy</div>
+      <div class="track-project">Single</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">12</div>
+      <div class="track-title">Duces</div>
+      <div class="track-feat">prod. Aevy & Evan Moiciso</div>
+      <div class="track-project">Single</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">13</div>
+      <div class="track-title">Zan Freestyle</div>
+      <div class="track-feat">Early hit — inspired "Dirty Drugs" title</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">14</div>
+      <div class="track-title">Flex a Hunnid</div>
+      <div class="track-feat">ft. UnoTheActivist</div>
+      <div class="track-project">—</div>
+    </div>
+    <div class="track-row">
+      <div class="track-num">15</div>
+      <div class="track-title">Hate</div>
+      <div class="track-feat">ft. Trippie Redd & K Suave</div>
+      <div class="track-project">Single</div>
+    </div>
+  </div>
+</section>
+
+<div class="chrome-divider"></div>
+
+<!-- TIMELINE -->
+<section id="timeline">
+  <div style="max-width:900px;margin:0 auto;">
+    <div class="section-label">006 — Journey</div>
+    <h2 class="section-title">Timeline</h2>
+  </div>
+  <div class="timeline-container">
+    <div class="tl-item">
+      <div class="tl-year">2015</div>
+      <div class="tl-text">Starts rapping at age 18 as <strong>Lil Ocho</strong>. The name comes from his No. 8 jersey on his rec basketball team. Begins making remixes and grinding on SoundCloud.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2017</div>
+      <div class="tl-text">Evolves into <strong>Zelly Ocho</strong>. Starts dropping 4–5 projects per year. Builds a following through sheer volume and consistency on SoundCloud and Spotify.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2019</div>
+      <div class="tl-text">Drops <strong>It Could B Worse</strong> and <strong>Drugs in Hell</strong>. Connects with <strong>16yrold (Sig.Carlito)</strong> — the producer behind "Mo Bamba." They begin a prolific creative partnership.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2020</div>
+      <div class="tl-text">Sound morphs into a movement. Releases <strong>Dungeon Music</strong> and <strong>Dead or Alive</strong>. His first pivotal project <strong>VLAD</strong> defines his new direction — "Violent Life Around Drugs."</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2021</div>
+      <div class="tl-text">Connects with <strong>Trippie Redd</strong> via social media. Drops <strong>OnlyVlad</strong> and <strong>Vlamily</strong>. The VLAD lifestyle becomes a full brand and community.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2022</div>
+      <div class="tl-text">Signs with <strong>1400 Entertainment</strong>. Launches the <strong>V2BM3</strong> series ("Vlad To Be Me"). Tours internationally with Trippie Redd. Drops <strong>"SLYDE"</strong> with Sharkboy and <strong>"Duces"</strong> video (filmed in LA and Brazil). Viral tracks <strong>"Deadguy"</strong> and <strong>"No Wok"</strong> build cult following.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2023</div>
+      <div class="tl-text">Releases <strong>High Art</strong> and continues V2BM3 volumes. Member of the <strong>SIG collective</strong> alongside 16yrold. Steady grind — 70+ projects in the vault at this point.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2024</div>
+      <div class="tl-text">Biggest year yet — drops <strong>10 projects</strong> in a single year. <strong>"V14D"</strong> with Trippie Redd on <strong>#2LV</strong> marks their first official collab. Drops <strong>H.O.E. EP</strong> and <strong>Dirty Drugs</strong> mixtape to close his "dirty drugs era."</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2025</div>
+      <div class="tl-text">New era with <strong>DJ Phat</strong> — releasing <strong>VLUTO</strong>, <strong>Vlada</strong>, and <strong>Vlux</strong>. Also drops <strong>Wait on Vlad</strong> and <strong>Don't Talk to Me</strong>. The grind never stops.</div>
+    </div>
+  </div>
+</section>
+
+<div class="chrome-divider"></div>
+
+<!-- CONNECT -->
+<section id="connect">
+  <div class="section-label">007 — Connect</div>
+  <h2 class="section-title">Find Zelly</h2>
+  <div class="connect-links">
+    <a href="https://open.spotify.com/artist/3svb0AOLHdFPE6P8PRB2ML" target="_blank" class="connect-link">
+      <div class="connect-icon">♫</div>
+      <div class="connect-label">Spotify</div>
+      <div class="connect-handle">Zelly Ocho</div>
+    </a>
+    <a href="https://music.apple.com/us/artist/zelly-ocho/1310831868" target="_blank" class="connect-link">
+      <div class="connect-icon">♪</div>
+      <div class="connect-label">Apple Music</div>
+      <div class="connect-handle">Zelly ocho</div>
+    </a>
+    <a href="https://soundcloud.com/zellyocho" target="_blank" class="connect-link">
+      <div class="connect-icon">◉</div>
+      <div class="connect-label">SoundCloud</div>
+      <div class="connect-handle">ZellyOcho</div>
+    </a>
+    <a href="https://www.instagram.com/zellyocho/" target="_blank" class="connect-link">
+      <div class="connect-icon">◐</div>
+      <div class="connect-label">Instagram</div>
+      <div class="connect-handle">@zellyocho</div>
+    </a>
+    <a href="https://x.com/Zellyocho1" target="_blank" class="connect-link">
+      <div class="connect-icon">✕</div>
+      <div class="connect-label">X (Twitter)</div>
+      <div class="connect-handle">@Zellyocho1</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-text">★ Zelly Ocho ★ Cleveland Ohio ★ 1400 / VLAD LLC ★ Est. 2015 ★</div>
+  <div class="footer-vlad">VLAD</div>
+</footer>
+
+<script>
+// Cursor glow follow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', (e) => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Generate random stars in hero
+const starsContainer = document.getElementById('heroStars');
+for (let i = 0; i < 30; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  star.textContent = Math.random() > 0.5 ? '★' : '✝';
+  star.style.left = Math.random() * 100 + '%';
+  star.style.top = Math.random() * 100 + '%';
+  star.style.animationDelay = Math.random() * 3 + 's';
+  star.style.fontSize = (8 + Math.random() * 12) + 'px';
+  starsContainer.appendChild(star);
+}
+
+// Smooth reveal on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.disco-card, .collab-item, .track-row, .tl-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'all 0.6s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
